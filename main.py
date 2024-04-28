@@ -314,6 +314,7 @@ def no_data_plot():
 
 #conn = st.connection("snowflake")
 #df = conn.query("SELECT * from prospects LIMIT 1000;", ttl=600)
+df = pd.read_csv('prospects.csv')
 
 # Fix column names. Replace underscore with space, lowercase column names, and capitalize first words
 df.columns = df.columns.str.replace('_', ' ').str.lower().str.title()
@@ -327,11 +328,39 @@ dynamic_filters.display_filters(location='sidebar')
 df_filtered = dynamic_filters.filter_df()
 
 
+with st.sidebar:
+    st.markdown('''The dataset is taken from [Kaggle](https://www.kaggle.com/datasets/aramacus/usa-public-companies) and slightly modified for the purpose of this app.
+    ''', unsafe_allow_html=True)
+    st.markdown('''[GitHub Repo](https://github.com/arsentievalex/instant-insight-web-app)''', unsafe_allow_html=True)
+    st.markdown('''The app created by [Oleksandr Arsentiev](https://twitter.com/alexarsentiev) for the purpose of
+    Streamlit Summit Hackathon''', unsafe_allow_html=True)
 
 ##############################################################################################################
 
-st.title('Hi Ross⚡')
+st.title('Hi Ross!⚡')
 
+with st.expander('What is this app about?'):
+    st.write('''
+    This app is designed to generate an instant company research.\n
+    In a matter of few clicks, a user gets a PowerPoint presentation with the company overview, SWOT analysis, financials, and value propostion tailored for the selling product. 
+    The app works with the US public companies.
+
+    Use Case Example:\n
+    Imagine working in sales for a B2B SaaS company that has hundreds of prospects and offers the following products: 
+    Accounting and Planning Software, CRM, Chatbot, and Cloud Data Storage.
+    You are tasked to do a basic prospect research and create presentations for your team. The prospects data is stored in a Snowflake database that feeds your CRM system.
+    You can use this app to quickly filter the prospects by sector, industry, prospect status, and product. 
+    Next, you can select the prospect you want to include in the presentation and click the button to generate the presentation.
+    And...that's it! You have the slides ready to be shared with your team.
+
+    Tech Stack:\n
+    • Database - Snowflake via Snowflake Connector\n
+    • Data Processing - Pandas\n
+    • Research Data - Yahoo Finance via Yahooquery, GPT 3.5 via LangChain\n
+    • Visualization - Plotly\n
+    • Frontend - Streamlit, AgGrid\n
+    • Presentation - Python-pptx\n
+    ''')
 
 num_of_cust = df_filtered.shape[0]
 st.metric(label='Number of Prospects', value=num_of_cust)
