@@ -314,7 +314,6 @@ def no_data_plot():
 
 #conn = st.connection("snowflake")
 #df = conn.query("SELECT * from prospects LIMIT 1000;", ttl=600)
-df = pd.read_csv('prospects.csv')
 
 # Fix column names. Replace underscore with space, lowercase column names, and capitalize first words
 df.columns = df.columns.str.replace('_', ' ').str.lower().str.title()
@@ -328,12 +327,6 @@ dynamic_filters.display_filters(location='sidebar')
 df_filtered = dynamic_filters.filter_df()
 
 
-with st.sidebar:
-    st.markdown('''The dataset is taken from [Kaggle](https://www.kaggle.com/datasets/aramacus/usa-public-companies) and slightly modified for the purpose of this app.
-    ''', unsafe_allow_html=True)
-    st.markdown('''[GitHub Repo](https://github.com/arsentievalex/instant-insight-web-app)''', unsafe_allow_html=True)
-    st.markdown('''The app created by [Oleksandr Arsentiev](https://twitter.com/alexarsentiev) for the purpose of
-    Streamlit Summit Hackathon''', unsafe_allow_html=True)
 
 ##############################################################################################################
 
