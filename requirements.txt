@@ -14,4 +14,4 @@ snowflake-connector-python
 langchain
 snowflake-snowpark-python
 pyarrow==10.0.1
-
+snowflake-snowpark-python
