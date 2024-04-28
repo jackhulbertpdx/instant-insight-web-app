@@ -1,9 +1,6 @@
 # streamlit_app.py
 
 import streamlit as st
-import os
-
-
 
 # Initialize connection.
 conn = st.connection("snowflake")
